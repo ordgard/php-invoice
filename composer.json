@@ -1,0 +1,34 @@
+{
+    "name": "ordgard/php-invoice",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "sheeenazien8",
+            "email": "sheenazien08@gmail.com"
+        }
+    ],
+    "require": {
+      "php": "^7.1"
+    },
+    "require-dev": {
+      "phpunit/phpunit": "^7.0"
+    },
+    "autoload": {
+      "files": [
+	"src/helpers.php"
+      ],
+      "psr-4": {
+	"Orgard\\PhpInvoice\\": "src"
+      }
+    },
+    "autoload-dev": {
+      "psr-4": {
+	"Orgard\\PhpInvoice\\Tests\\": "tests"
+      }
+    },
+    "scripts": {
+      "test": "vendor/bin/phpunit",
+      "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+    }
+}
