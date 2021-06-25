@@ -38,13 +38,13 @@ echo $invoice->render();
 We invest a lot of resources into creating this thing. You can support us by pressing the star button in the top right corner, or buy us a cup of coffee to brew together.
 
 ## Installing
-`composer require ordgard/php-invoice-template`
+`composer require ordgard/php-invoice`
 
 ## Basic usage
 
 ### Styling
 * Styling in one item use object style helper:
-```
+```php
 $invoice->setItem([
   'no' => [1,2],
   'description' => [ 'item1', 'item 2'],
