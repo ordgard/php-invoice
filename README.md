@@ -51,7 +51,7 @@ $invoice->setItem([
   'qty' => [2, 3],
   'price' => [new Style(['bg-color' => 'blue', 'align' => 'right'], '$2000'), new Style(['bg-color' => 'blue', 'align' => 'right'], '$4000')],
   'subtotal' => [new Style(['bg-color' => 'blue', 'align' => 'right'], '$2000'), new Style(['bg-color' => 'blue', 'align' => 'right'], '$4000')],
-  'row_style' => new Style([ 
+   new Style([ 
     'bg-color' => 'blue',
     'size' => '12px'
   ]),
