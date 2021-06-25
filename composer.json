@@ -8,27 +8,31 @@
             "email": "sheenazien08@gmail.com"
         }
     ],
+    "homepage": "https://github.com/ordgard/php-invoice",
     "require": {
-      "php": "^7.1"
+        "php": "^7.1"
     },
     "require-dev": {
-      "phpunit/phpunit": "^7.0"
+        "phpunit/phpunit": "^7.0"
     },
     "autoload": {
-      "files": [
-	"src/helpers.php"
-      ],
-      "psr-4": {
-	"Orgard\\PhpInvoice\\": "src"
-      }
+        "files": [
+            "src/helpers.php"
+        ],
+        "psr-4": {
+            "Ordgard\\PhpInvoice\\": "src"
+        }
     },
     "autoload-dev": {
-      "psr-4": {
-	"Orgard\\PhpInvoice\\Tests\\": "tests"
-      }
+        "psr-4": {
+            "Ordgard\\PhpInvoice\\Tests\\": "tests"
+        }
     },
     "scripts": {
-      "test": "vendor/bin/phpunit",
-      "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+    },
+    "config": {
+        "sort-packages": true
     }
 }
