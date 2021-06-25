@@ -80,6 +80,10 @@ class PhpInvoce
     public function render()
     {
         return [
+            'info' => [
+                'from' => [],
+                'to' => []
+            ],
             'header' => [
                 'item' => ['no', 'description', 'qty', 'price',
                     [
