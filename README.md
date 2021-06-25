@@ -1,4 +1,4 @@
-# php-invoice-template
+# php-invoice
 Makes it easier for you to generate invoices 
 
 ## Introduction
@@ -18,11 +18,11 @@ $invoice->setItem([
   'no' => [1,2],
   'description' => [ 'item1', 'item 2'],
   'qty' => [2, 3],
-  'price' => ['style' => 'bold', 'items' => ['$2000', '$4000']],
-  'subtotal' => ['style' => 'bold', 'items' => ['$2000', '$4000']],
+  'price' => ['style' => ['align' => 'center'], 'items' => ['$2000', '$4000']],
+  'subtotal' => ['style' => ['align' => 'center'], 'items' => ['$2000', '$4000']],
   'row_style' => [ 
-    ['bg-color' => 'blue'],
-    ['size' => '12px'],
+    'bg-color' => 'blue',
+    'size' => '12px'
   ],
 ], $globalStyle);
 $invoice->setFooter([], $footerStyle);
@@ -41,6 +41,22 @@ We invest a lot of resources into creating this thing. You can support us by pre
 `composer require ordgard/php-invoice-template`
 
 ## Basic usage
+
+### Styling
+* Styling in one item use object style helper:
+```
+$invoice->setItem([
+  'no' => [1,2],
+  'description' => [ 'item1', 'item 2'],
+  'qty' => [2, 3],
+  'price' => [new Style(['bg-color' => 'blue', 'align' => 'right'], '$2000'), new Style(['bg-color' => 'blue', 'align' => 'right'], '$4000')],
+  'subtotal' => [new Style(['bg-color' => 'blue', 'align' => 'right'], '$2000'), new Style(['bg-color' => 'blue', 'align' => 'right'], '$4000')],
+  'row_style' => new Style([ 
+    'bg-color' => 'blue',
+    'size' => '12px'
+  ]),
+], $globalStyle);
+```
 
 ## Advanced usage
 

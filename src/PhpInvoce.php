@@ -79,6 +79,41 @@ class PhpInvoce
      */
     public function render()
     {
-        return 'render';
+        return [
+            'header' => [
+                'item' => ['no', 'description', 'qty', 'price',
+                    [
+                        'text' => 'subtotal',
+                        'style' => ['align' => 'center', 'text-decoration' => 'italic']
+                    ]
+                ],
+                'style' => ['bg-color' => 'blue', 'size' => '12px']
+            ],
+            'content' => [
+                [
+                    'items' => [
+                        [
+                            'item' => [1, 'Ini Description', 10, 12000,
+                                [
+                                    'text' => 120000,
+                                    'style' => ['align' => 'center', 'text-decoration' => 'italic']
+                                ]
+                            ],
+                            'style' => ['bg-color' => 'blue', 'size' => '12px']
+                        ],
+                        [
+                            'item' => [2, 'Ini Description 2', 15, 10000,
+                                [
+                                    'text' => 150000,
+                                    'style' => ['align' => 'center', 'text-decoration' => 'italic']
+                                ]
+                            ],
+                            'style' => ['bg-color' => 'blue', 'size' => '12px']
+                        ],
+                    ]
+                ],
+            ],
+            'footer' => []
+        ];
     }
 }
