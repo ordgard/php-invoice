@@ -2,7 +2,8 @@
 
 namespace Ordgard\PhpInvoice\Factories;
 
-use Ordgard\PhpInvoice\PhpInvoce;
+use Ordgard\PhpInvoice\Builders\PhpInvoiceBuilder;
+use Ordgard\PhpInvoice\Interfaces\PhpInvoiceInterface;
 
 /** @package Ordgard\PhpInvoice\Factories */
 class PhpInvoiceFactory
@@ -12,8 +13,8 @@ class PhpInvoiceFactory
      * @param array $to
      * @return PhpInvoce
      */
-    public static function make($from, $to)
+    public static function make($from, $to): PhpInvoiceInterface
     {
-        return new PhpInvoce($from, $to);
+        return new PhpInvoiceBuilder($from, $to);
     }
 }

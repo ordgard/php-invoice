@@ -2,122 +2,95 @@
 
 namespace Ordgard\PhpInvoice;
 
+use Ordgard\PhpInvoice\Interfaces\ItemResolver;
+use Ordgard\PhpInvoice\Interfaces\StyleResolver;
+
 /** @package Ordgard\PhpInvoice */
 class PhpInvoce
 {
-    private $tables = [];
-
-    private $headers = [];
-
-    private $theme;
+    private $parts = [];
+    private $part = [];
+    private $index;
 
     /**
      * @param array $from
      * @param array $to
      */
-    public function __construct($from, $to)
+    public function __construct(array $from, array $to)
     {
-        $this->from = $from;
-        $this->to = $to;
+        $this->parts['info'] = $this->info($from, $to);
     }
 
-    /**
-     * @param string $theme
-     * @return PhpInvoce
-     */
-    public function setTheme($theme): self
+    public function addParts(string $part_name, array $data): void
     {
-        $this->theme = $theme;
+        switch ($part_name) {
+            case 'items':
+                $this->part['content']['header'] = $this->mapHeader($data);
+                $this->part['content']['items'] = $this->mapItem($data);
+                break;
 
-        return $this;
+            case 'footer':
+                $this->part['content']['footer'] = $this->mapFooter($data);
+                break;
+        }
+
+        $this->parts['table'][$this->index] = $this->part;
     }
 
-    /**
-     * @param array $header
-     * @param array $style
-     * @return PhpInvoce
-     */
-    public function setHeader($header, $style = []): self
+    public function getParts(): array
     {
-        $this->headers = $header;
-
-        return $this;
+        return $this->parts;
     }
 
-    /**
-     * Setter for items
-     *
-     * @param array $item
-     * @param array $style
-     * @return PhpInvoce
-     */
-    public function setItem($items, $style = []): self
+    private function mapItem(array $data): array
     {
-        $this->tables = $items;
+        foreach ($data as $row) {
+            if ($row instanceof ItemResolver) {
 
-        return $this;
+            }
+            if ($row instanceof StyleResolver) {
+
+            }
+        }
+
+        return [];
     }
 
-    /**
-     * Setter for Footer
-     *
-     * @param array $footers
-     * @param array $style
-     * @return PhpInvoce
-     */
-    public function setFooter($footers, $style = []): self
+    private function mapFooter(array $data): array
     {
-        $this->Footer = $footers;
+        foreach ($data as $row) {
+            if ($row instanceof ItemResolver) {
 
-        return $this;
+            }
+            if ($row instanceof StyleResolver) {
+
+            }
+        }
+
+        return [];
     }
 
-    /**
-     * render configuration to invoice template
-     *
-     * @return string|html
-     */
-    public function render()
+    private function mapHeader(array $data): array
+    {
+        return [];
+    }
+
+    private function info(array $from, array $to): array
     {
         return [
-            'info' => [
-                'from' => [],
-                'to' => []
-            ],
-            'header' => [
-                'item' => ['no', 'description', 'qty', 'price',
-                    [
-                        'text' => 'subtotal',
-                        'style' => ['align' => 'center', 'text-decoration' => 'italic']
-                    ]
-                ],
-                'style' => ['bg-color' => 'blue', 'size' => '12px']
-            ],
-            'content' => [
-                [
-                    'items' => [
-                        [
-                            'item' => [1, 'Ini Description', 10, 12000,
-                                [
-                                    'text' => 120000,
-                                    'style' => ['align' => 'center', 'text-decoration' => 'italic']
-                                ]
-                            ],
-                            'style' => ['bg-color' => 'blue', 'size' => '12px']
-                        ],
-                        [
-                            'item' => [2, 'Ini Description 2', 15, 10000,
-                                [
-                                    'text' => 150000,
-                                    'style' => ['align' => 'center', 'text-decoration' => 'italic']
-                                ]
-                            ],
-                            'style' => ['bg-color' => 'blue', 'size' => '12px']
-                        ],
-                    ]
-                ],
-            ],
-            'footer' => []
+            'from' => $from,
+            'to' => $to
         ];
     }
+
+    public function attemptIndex($index): void
+    {
+        $this->index = $index;
+    }
+
+    public function clearParts()
+    {
+        $this->part = [];
+    }
+
 }
