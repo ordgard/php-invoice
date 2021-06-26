@@ -2,6 +2,8 @@
 
 namespace Ordgard\PhpInvoice\Resolvers;
 
-class ItemResolver
+use Ordgard\PhpInvoice\Interfaces\ItemResolver as InterfacesItemResolver;
+
+class ItemResolver implements InterfacesItemResolver
 {
 }
