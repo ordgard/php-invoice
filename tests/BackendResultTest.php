@@ -50,15 +50,7 @@ class BackendResultTest extends TestCase
         list($from, $to) = $this->info();
 
         $phpInvoice = PhpInvoiceFactory::make($from, $to);
-        $phpInvoice->setItem([
-            'no' => [1, 2, 3],
-            'description' => ['Ini Description', 'Ini Description 2', 'Ini Description 3'],
-            'row_style' => [
-                ['bg-color' => 'blue', 'size' => '12px'],
-                ['bg-color' => 'orange', 'size' => '12px'],
-                ['bg-color' => 'blue', 'size' => '12px'],
-            ]
-        ]);
+        $phpInvoice->setItem($this->item());
 
         $expected_content_items = [
             'items' => [
@@ -126,6 +118,7 @@ class BackendResultTest extends TestCase
 
         $phpInvoice = PhpInvoiceFactory::make($from, $to);
         $phpInvoiceProperty = $this->reflection($phpInvoice);
+        /** @var PhpInvoce $phpInvoiceObj */
         $phpInvoiceObj = $phpInvoiceProperty->getValue($phpInvoice);
         $parts = $phpInvoiceObj->getParts();
         $this->assertSame($expected_content_info, [
@@ -133,9 +126,37 @@ class BackendResultTest extends TestCase
         ]);
     }
 
+    /** @test */
     public function it_test_for_footer_array(): void
     {
+        list($from, $to) = $this->info();
+        $phpInvoice = PhpInvoiceFactory::make($from, $to);
+        $phpInvoice->setItem($this->item());
+        $phpInvoice->setFooter([
+            '', '', 'Ini Footer',
+        ],
+        [
+            'style' => [
+                'bg-color' => 'blue'
+            ]
+        ]);
 
+        $expected_content_footer = [
+            'footer' => [
+                'items' => ['', '', 'Ini Footer']
+            ],
+            'style' => [
+                'bg-color' => 'blue'
+            ]
+        ];
+
+        $phpInvoiceProperty = $this->reflection($phpInvoice);
+        /** @var PhpInvoce $phpInvoiceObj */
+        $phpInvoiceObj = $phpInvoiceProperty->getValue($phpInvoice);
+        $parts = $phpInvoiceObj->getParts();
+        $this->assertSame($expected_content_footer, [
+            'footer' => $parts['table'][0]['content']['footer']
+        ]);
     }
 
     public function it_test_for_style_per_item(): void
@@ -190,5 +211,18 @@ class BackendResultTest extends TestCase
         ];
 
         return [$from, $to];
+    }
+
+    private function item(): array
+    {
+        return [
+            'no' => [1, 2, 3],
+            'description' => ['Ini Description', 'Ini Description 2', 'Ini Description 3'],
+            'row_style' => [
+                ['bg-color' => 'blue', 'size' => '12px'],
+                ['bg-color' => 'orange', 'size' => '12px'],
+                ['bg-color' => 'blue', 'size' => '12px'],
+            ]
+        ];
     }
 }
